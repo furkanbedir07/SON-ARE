@@ -1,0 +1,30 @@
+# PHP Güvenlik Ayarları
+Options -Indexes
+DirectoryIndex index.php login.php
+
+# Hata sayfalarını gizle
+ErrorDocument 404 /login.php
+ErrorDocument 403 /login.php
+
+# PHP ayarları
+php_flag display_errors Off
+php_flag log_errors On
+
+# Güvenlik başlıkları
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options nosniff
+    Header always set X-Frame-Options DENY
+    Header always set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+# Dosya yükleme güvenliği
+<Files "*.php">
+    Order allow,deny
+    Allow from all
+</Files>
+
+# Hassas dosyaları koru
+<Files "config.php">
+    Order allow,deny
+    Allow from all
+</Files>
